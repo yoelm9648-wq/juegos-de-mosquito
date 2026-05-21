@@ -1,0 +1,99 @@
+# Crear mi entorno virtual en python ejecutando el siguiente comando en la terminal:
+# python -m venv mi_entorno
+# Activar el entorno virtual:
+# En Windows:
+# mi_entorno\Scripts\activate.ps1
+
+#instalar pygame en el entorno virtual:
+# pip install pygame
+
+#importamos pygame y sys para manejar eventos y salir del juego
+import pygame, sys 
+from pygame.locals import *
+
+#Crear mi repositorio en GitHub y subir mi proyecto a GitHub debe ser publico.
+#Enviar Link de mi proyecto de GitHub al docente.
+
+def main():
+    pygame.init()
+    ANCHO = 680
+    ALTO = 680
+    screen = pygame.display.set_mode((ANCHO, ALTO))
+    pygame.display.set_caption("Mi primer juego en Python")
+    clock = pygame.time.Clock()
+    # colores para mi ventana
+    BLANCO = (255, 255, 255)
+    MARRON = (139, 69, 19)
+    NEGRO = (0, 0, 0)
+    
+    while True:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            
+        screen.fill(BLANCO)
+        font = pygame.font.SysFont("Arial", 30)
+        mitexto = font.render("Hola Mundo!", True, MARRON)
+
+        text_rect = mitexto.get_rect()
+        text_rect.center = (ANCHO // 2, ALTO // 2)
+        screen.blit(mitexto, text_rect)
+        tablero(screen,85)
+       
+        pygame.display.flip()
+        clock.tick(60)
+        
+if __name__ == "_main_":
+ main()
+
+import pygame
+
+pygame.init()
+
+pantalla = pygame.display.set_mode((600, 600))
+
+def tablero(pantalla, tamaño_celda):
+
+    # colores del tablero
+    Blanco = (255,255,255)
+    Negro = (0,0,0)
+
+    # filas y columnas
+    filas = 8
+    columna = 8
+
+    for fila in range(filas):
+        for col in range(columna):
+
+            # colorear celda
+            if (fila + col) % 2 == 0:
+                color = Blanco
+            else:
+                color = Negro
+
+            # dibujar celda
+            rect = (
+                col * tamaño_celda,
+                fila * tamaño_celda,
+                tamaño_celda,
+                tamaño_celda
+            )
+
+            pygame.draw.rect(pantalla, color, rect)
+
+    pygame.display.update()
+
+
+# LLAMAR LA FUNCIÓN
+tablero(pantalla, 75)
+
+# mantener ventana abierta
+ejecutando = True
+
+while ejecutando:
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            ejecutando = False
+
+pygame.quit()
